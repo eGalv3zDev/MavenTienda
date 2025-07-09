@@ -1,14 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianbreyner.controller.ProductosController">
-    <stylesheets>
-        <URL value="@productosview.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianbreyner.controller.ProductosController">
+
+  <!-- Sidebar con color más oscuro de la paleta -->
+  <VBox prefWidth="200.0" style="-fx-background-color: #7d95bd;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+    <children>
+      <ImageView fitHeight="80" fitWidth="80" style="-fx-padding: 20;" />
+      <Button fx:id="btnAgregar" graphicTextGap="10" style="-fx-text-fill: white; -fx-background-color: transparent; -fx-font-size: 16;" text="Agregar" />
+      <Button fx:id="btnActualizar" style="-fx-text-fill: white; -fx-background-color: transparent; -fx-font-size: 16;" text="Actualizar" />
+      <Button fx:id="btnEliminar" style="-fx-text-fill: white; -fx-background-color: transparent; -fx-font-size: 16;" text="Eliminar" />
+      <Button style="-fx-text-fill: white; -fx-background-color: transparent; -fx-font-size: 16;" text="Reportes" />
+    </children>
+  </VBox>
+
+  <!-- Contenedor principal -->
+  <AnchorPane style="-fx-background-color: #e0f8ff;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+    <!-- Header -->
+    <Label layoutX="220.0" layoutY="20.0" style="-fx-text-fill: #7d95bd;" text="Gestión de Productos" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10">
+      <font>
+        <Font size="24.0" />
+      </font>
+    </Label>
+
+    <!-- Barra de búsqueda -->
+    <HBox spacing="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="60">
+      <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="603.0" promptText="Buscar" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS" />
+      <Button fx:id="btnBuscar" style="-fx-background-color: #96aece; -fx-text-fill: white;" text="🔍" />
+    </HBox>
+
+    <!-- Tabla -->
+    <TableView fx:id="tablaProductos" style="-fx-background-color: #c7dfef;" AnchorPane.bottomAnchor="220" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="100">
+      <columns>
+        <TableColumn fx:id="colIDProducto" prefWidth="49.0" text="ID" />
+        <TableColumn fx:id="colProducto" prefWidth="116.0" text="Producto" />
+        <TableColumn fx:id="colDescripcion" prefWidth="199.0" text="Descripcion" />
+        <TableColumn fx:id="colStock" prefWidth="149.0" text="Stock" />
+        <TableColumn fx:id="colPrecio" prefWidth="209.0" text="Precio" />
+      </columns>
+    </TableView>
+
+    <!-- Formulario -->
+    <GridPane hgap="10" prefHeight="200" style="-fx-background-color: #afc7de;" vgap="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+      <columnConstraints>
+        <ColumnConstraints percentWidth="25" />
+        <ColumnConstraints percentWidth="25" />
+        <ColumnConstraints percentWidth="25" />
+        <ColumnConstraints percentWidth="25" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="30.0" />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints maxHeight="30.0" minHeight="20.0" prefHeight="30.0" />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      </rowConstraints>
+
+      <children>
+        <Label prefHeight="17.0" prefWidth="25.0" text="ID" GridPane.rowIndex="1" />
+        <TextField fx:id="txtID" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Producto" GridPane.rowIndex="2" />
+        <TextField fx:id="txtProducto" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Descripcion" GridPane.rowIndex="3" />
+        <TextField fx:id="txtDescripcion" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Stock" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField fx:id="txtStock" style="-fx-background-color: #ffffff;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+        <Label text="Precio" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField fx:id="txtPrecio" style="-fx-background-color: #ffffff;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+        <Label text="Detalle Productos:" />
+      </children>
+    </GridPane>
+
+  </AnchorPane>
+
 </AnchorPane>
