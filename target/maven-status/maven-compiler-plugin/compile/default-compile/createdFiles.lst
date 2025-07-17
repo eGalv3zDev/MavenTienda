@@ -1,3 +1,17 @@
+org\adrianbreyner\model\Carrito.class
+org\adrianbreyner\controller\PaginaPrincipalController.class
 org\adrianbreyner\db\Conexion.class
+org\adrianbreyner\controller\CarritoController$EstadoFormulario.class
+org\adrianbreyner\controller\PaginaInicioController.class
+org\adrianbreyner\controller\ProductoController$EstadoFormulario.class
+org\adrianbreyner\controller\ProductoController.class
+org\adrianbreyner\controller\TiendaProductosController.class
+org\adrianbreyner\controller\TiendaProductosController$EstadoFormulario.class
+org\adrianbreyner\controller\RegistroController.class
+org\adrianbreyner\controller\Inicio.class
+org\adrianbreyner\model\TotalGeneral.class
+org\adrianbreyner\controller\RegistroController$acciones.class
 org\adrianbreyner\model\Productos.class
+org\adrianbreyner\controller\CarritoController.class
+org\adrianbreyner\model\Usuarios.class
 org\adrianbreyner\system\Main.class

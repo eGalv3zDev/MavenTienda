@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="main-content" stylesheets="@productosCSS.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianbreyner.controller.CarritoController">
+   <children>
+      <Label styleClass="header-title" text="Carritos" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0">
+         <children>
+            <TextField fx:id="txtBuscar" prefHeight="35.0" promptText="Buscar producto por nombre o descripción..." styleClass="search-field" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnBuscar" onAction="#buscarCarrito" prefHeight="35.0" styleClass="search-button" text="Buscar" />
+         </children>
+      </HBox>
+      <TableView fx:id="tablaCarrito" layoutX="155.2" prefHeight="330.0" prefWidth="859.0" styleClass="data-table" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="130.0">
+         <columns>
+            <TableColumn fx:id="colIdCarrito" maxWidth="80.0" minWidth="60.0" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="colIdProducto" prefWidth="150.0" text="Producto" />
+            <TableColumn fx:id="colCantidad" prefWidth="250.0" text="Cantidad" />
+            <TableColumn fx:id="colPrecio" maxWidth="100.0" minWidth="80.0" prefWidth="90.0" text="Precio Unitario" />
+            <TableColumn fx:id="colTotal" maxWidth="120.0" minWidth="100.0" prefWidth="110.0" text="Sumatoria" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <GridPane hgap="15.0" layoutX="152.0" prefHeight="220.0" prefWidth="671.0" styleClass="form-panel" vgap="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="127.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="180.0" minWidth="100.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="251.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="180.0" minWidth="31.0" prefWidth="72.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="153.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
+         </rowConstraints>
+         <children>
+            <Label styleClass="form-title" text="Detalles del Producto" GridPane.columnSpan="4" GridPane.halignment="LEFT" />
+            <Label styleClass="form-label" text="ID Carrito:" GridPane.rowIndex="1" />
+            <TextField fx:id="txtId" editable="false" prefHeight="38.0" prefWidth="62.0" promptText="Generado automáticamente" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label styleClass="form-label" text="ID Producto:" GridPane.rowIndex="2" />
+            <TextField fx:id="txtID" editable="false" promptText="Introduce el nombre del producto" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label styleClass="form-label" text="Cantidad:" GridPane.rowIndex="3" />
+            <TextField fx:id="txtCantidad" editable="false" promptText="Introduce la descripción" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label alignment="CENTER_RIGHT" styleClass="form-label" text="Precio:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtPrecio" editable="false" promptText="Cantidad en stock" styleClass="text-field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label styleClass="form-label" text="Total:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txtTotal" editable="false" promptText="Precio del producto" styleClass="text-field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button onAction="#eliminarCarro" prefHeight="36.0" prefWidth="92.0" styleClass="search-button" text="Eliminar" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <ImageView fitHeight="36.0" fitWidth="38.0" layoutX="14.0" layoutY="670.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/house.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="14.0" layoutY="666.0" mnemonicParsing="false" onAction="#PaginaInicio" opacity="0.0" prefHeight="40.0" prefWidth="36.0" text="Button" />
+      <ImageView fitHeight="36.0" fitWidth="38.0" layoutX="67.0" layoutY="670.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/bolsa.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="67.0" layoutY="666.0" mnemonicParsing="false" onAction="#Tienda" opacity="0.0" prefHeight="40.0" prefWidth="36.0" text="Button" />
+      <TableView fx:id="tablaTotalGeneral" layoutX="1024.0" layoutY="129.0" prefHeight="50.0" prefWidth="117.0" styleClass="data-table">
+         <columns>
+            <TableColumn fx:id="colTotalGeneral" maxWidth="191.9999755859375" minWidth="52.0" prefWidth="126.4000244140625" text="Total General" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>

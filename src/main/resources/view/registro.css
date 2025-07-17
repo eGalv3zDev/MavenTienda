@@ -1,0 +1,36 @@
+
+.fondo{
+    -fx-background-color: #58355E;
+}
+
+.panelInicio{
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+    -fx-font-family: Consolas;
+    -fx-effect: dropshadow(gaussian, black, 0, 0, 10, 10);
+}
+
+.panelesInicio{
+    -fx-background-radius: 20px;
+}
+
+.woof{
+    -fx-background-color: #698E93;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+    -fx-font-size: 15px;
+    -fx-font-family: Consolas;
+    -fx-font-weight: bold;
+}
+
+.woof:hover{
+    -fx-background-color: #EC0B43;
+    -fx-text-fill: white;
+}
+
+.regresar{
+    -fx-background-color: white;
+    -fx-text-fill: grey;
+    -fx-background-weigth: 10px;
+    -fx-background-radius: 80px;
+}

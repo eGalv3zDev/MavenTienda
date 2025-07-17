@@ -16,16 +16,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 import org.adrianbreyner.db.Conexion;
 import org.adrianbreyner.model.Productos;
 import org.adrianbreyner.system.Main;
 
-public class ProductosController implements Initializable {
+public class ProductoController implements Initializable {
 
     private Main principal;
 
     @FXML
-    private Button btnAgregar, btnActualizar, btnEliminar, btnGuardar, btnCancelar, btnBuscar;
+    private Button btnAgregar, btnActualizar, btnEliminar, btnBuscar, btnComprar;
     @FXML
     private TextField txtID, txtBuscar, txtProducto, txtDescripcion, txtStock, txtPrecio;
 
@@ -42,12 +43,12 @@ public class ProductosController implements Initializable {
         configurarColumna();
         cargarTablaProductos();
         tablaProductos.setOnMouseClicked(eventHandler -> cargarProductosEnTextField());
-        //Ajusta el ancho de las columnas de la tabla de Productos
-        colIDProducto.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.11));
-        colProducto.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.24));
-        colDescripcion.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.21));
-        colStock.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.14));
-        colPrecio.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.30));
+        //Ajusta el ancho de las columnas de la tabla de Clientes
+        colIDProducto.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.08));
+        colProducto.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.20));
+        colDescripcion.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.18));
+        colStock.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.12));
+        colPrecio.prefWidthProperty().bind(tablaProductos.widthProperty().multiply(0.22));
     }
 
     @FXML
@@ -109,8 +110,85 @@ public class ProductosController implements Initializable {
         }
         return productos;
     }
-    
-     public void limpiarTextField() {
+
+    public Productos obtenerModeloProductos() {
+        int idProducto = 0;
+        int stock = 0;
+        double precio = 0.0;
+
+        try {
+            idProducto = Integer.parseInt(txtID.getText().trim()); // ← AÑADIDO
+        } catch (Exception e) {
+            System.out.println("");
+        }
+        
+        try {
+            stock = Integer.parseInt(txtStock.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Stock inválido.");
+        }
+
+        try {
+            precio = Double.parseDouble(txtPrecio.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Precio inválido.");
+        }
+
+        String producto = txtProducto.getText();
+        String descripcion = txtDescripcion.getText();
+
+        return new Productos(idProducto, producto, descripcion, stock, precio);
+    }
+
+    public void agregarProducto() {
+        modeloProductos = obtenerModeloProductos();
+        try {
+            CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("call sp_AgregarProducto(?,?,?,?);");
+            enunciado.setString(1, modeloProductos.getProducto());
+            enunciado.setString(2, modeloProductos.getDescripcion());
+            enunciado.setInt(3, modeloProductos.getStock());
+            enunciado.setDouble(4, modeloProductos.getPrecio());
+            enunciado.execute();
+            cargarTablaProductos();
+            cambiarEstado(EstadoFormulario.NINGUNA);
+        } catch (SQLException ex) {
+            System.out.println("Error al agregar");
+            ex.printStackTrace();
+        }
+    }
+
+    public void actualizarProducto() {
+        modeloProductos = obtenerModeloProductos();
+        try {
+            CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("call sp_EditarProducto(?,?,?,?,?);");
+            enunciado.setInt(1, modeloProductos.getIdProducto());
+            enunciado.setString(2, modeloProductos.getProducto());
+            enunciado.setString(3, modeloProductos.getDescripcion());
+            enunciado.setInt(4, modeloProductos.getStock());
+            enunciado.setDouble(5, modeloProductos.getPrecio());
+            enunciado.executeUpdate();
+            cargarTablaProductos();
+            cambiarEstado(EstadoFormulario.NINGUNA);
+        } catch (SQLException e) {
+            System.out.println("Error al editar/actualizar");
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarProducto() {
+        modeloProductos = obtenerModeloProductos();
+        try {
+            CallableStatement enunciado = Conexion.getInstancia().getConexion().prepareCall("call sp_EliminarProducto(?);");
+            enunciado.setInt(1, modeloProductos.getIdProducto());
+            enunciado.execute();
+            cargarTablaProductos();
+        } catch (SQLException e) {
+            System.out.println("Error al Eliminar Producto");
+            e.printStackTrace();
+        }
+    }
+
+    public void limpiarTextField() {
         txtID.clear();
         txtProducto.clear();
         txtDescripcion.clear();
@@ -130,11 +208,53 @@ public class ProductosController implements Initializable {
         btnBuscar.setDisable(activo);
         txtBuscar.setDisable(activo);
 
-        btnAgregar.setText(activo ? "Guardar" : "Agregar");
-        btnEliminar.setText(activo ? "Cancelar" : "Eliminar");
+        btnAgregar.setText(activo ? "  💾 Guardar" : "  ➕ Agregar");
+        btnEliminar.setText(activo ? "  ❌ Cancelar" : "  🗑 Eliminar");
         btnActualizar.setDisable(activo);
     }
-    
+
+    @FXML
+    private void insertarProducto() {
+        switch (tipoDeAccion) {
+            case NINGUNA:
+                System.out.println("Voy a crear un registro para Clientes");
+                limpiarTextField();
+                cambiarEstado(EstadoFormulario.AGREGAR);
+                break;
+            case AGREGAR:
+                System.out.println("Voy a guardar los datos ingresados");
+                agregarProducto();
+                break;
+            case ACTUALIZAR:
+                System.out.println("Voy a guardar la edicion indicada");
+                actualizarProducto();
+                break;
+        }
+    }
+
+    @FXML
+    private void editarProducto() {
+        tipoDeAccion = EstadoFormulario.ACTUALIZAR;
+        cambiarEstado(EstadoFormulario.ACTUALIZAR);
+    }
+
+    @FXML
+    private void eliminarProd() {
+        eliminarProducto();
+    }
+
+    @FXML
+    private void cancelarEliminar() {
+        cargarProductosEnTextField();
+        tipoDeAccion = EstadoFormulario.NINGUNA;
+        cambiarEstado(EstadoFormulario.NINGUNA);
+    }
+
+    @FXML
+    private void CerrarSesion() {
+        principal.IniciarSesion();
+    }
+
     @FXML
     private void buscarProducto() {
         ArrayList<Productos> resultadoBusqueda = new ArrayList<>();
@@ -149,4 +269,5 @@ public class ProductosController implements Initializable {
             tablaProductos.getSelectionModel().selectFirst();
         }
     }
+
 }

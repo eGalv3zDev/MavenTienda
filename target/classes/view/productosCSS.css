@@ -1,0 +1,126 @@
+/* Paleta de colores */
+.root {
+    -primary-dark: #2C3E50; /* Azul oscuro para sidebar */
+    -primary-light: #F4F6F6; /* Gris muy claro para fondo principal */
+    -accent-blue: #3498DB; /* Azul para botones de acción */
+    -text-dark: #34495E; /* Gris oscuro para texto principal */
+    -text-light: #ECF0F1; /* Blanco para texto en fondo oscuro */
+    -border-gray: #BDC3C7; /* Gris para bordes sutiles */
+    -form-background: #E0E7EB; /* Gris azulado suave para el formulario */
+    -table-background: #ECF0F1; /* Gris claro para la tabla */
+    -white: #FFFFFF;
+}
+
+.anchor-pane {
+    -fx-background-color: -primary-light;
+}
+
+.sidebar {
+    -fx-background-color: -primary-dark;
+    -fx-padding: 20px 0;
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text-light;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 15px; 
+    -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.main-content {
+    -fx-background-color: #58355E;
+}
+
+.header-title {
+    -fx-text-fill: -accent-blue;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.search-field {
+    -fx-background-color: -white;
+    -fx-border-color: -border-gray;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 10px; 
+    -fx-font-size: 14px;
+}
+
+.search-field:focused {
+    -fx-border-color: -accent-blue;
+}
+
+.search-button {
+    -fx-background-color: -accent-blue;
+    -fx-text-fill: -white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+}
+
+.search-button:hover {
+    -fx-background-color: #2874A6; 
+}
+
+.data-table {
+    -fx-background-color: -table-background;
+    -fx-border-color: -border-gray;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-table-cell-border-color: #DDE2E7;
+    -fx-selection-bar: -accent-blue;
+    -fx-selection-bar-text: -white;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: -form-background; 
+    -fx-border-radius: 5px 5px 0 0; 
+}
+
+.data-table .column-header .label {
+    -fx-text-fill: -text-dark;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.data-table .table-row-cell:empty {
+    -fx-background-color: -table-background;
+}
+
+.form-panel {
+    -fx-background-color: -form-background;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+}
+
+.form-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-dark;
+    -fx-padding: 0 0 10px 0; 
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -text-dark;
+}
+
+.text-field {
+    -fx-background-color: -white;
+    -fx-border-color: -border-gray;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 10px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: -accent-blue;
+}

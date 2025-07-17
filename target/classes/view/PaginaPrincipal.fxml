@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="fondo" stylesheets="@registro.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianbreyner.controller.PaginaPrincipalController">
+   <children>
+      <GridPane alignment="CENTER" layoutX="454.0" layoutY="210.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="289.0" prefWidth="372.0" styleClass="panelInicio">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="66.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="306.0" minWidth="0.0" prefWidth="55.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="542.0" minWidth="10.0" prefWidth="208.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="542.0" minWidth="10.0" prefWidth="83.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="176.33331298828125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="50.0" valignment="TOP" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Registrarse" prefHeight="28.0" prefWidth="131.0" styleClass="woof" text="¡Registrate!" textOverrun="CENTER_ELLIPSIS" translateX="110.0" translateY="6.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="117.0" fitWidth="153.0" translateX="22.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../img/3514981.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtIdUsuario" editable="false" prefColumnCount="0" prefHeight="30.0" prefWidth="100.0" styleClass="panelesInicio" visible="false" GridPane.columnIndex="3" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#IniciarSesion" prefHeight="28.0" prefWidth="157.0" styleClass="woof" text="¡Inicia Sesión!" textOverrun="CENTER_ELLIPSIS" translateX="-65.0" translateY="6.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Gill Sans MT" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
